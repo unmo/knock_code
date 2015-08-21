@@ -7,9 +7,24 @@ Created on Fri Aug 07 17:13:35 2015
 @
 """
 
-# reserveメソッドの代わりに、[ ]演算子を使うと同じ事ができる。
+import argparse
 
-
-
-str = "stressed"
-print str[::-1]
+def main(input_file):
+    with open(input_file,"r") as in_file:
+        for line in in_file:
+            if "====" in line:
+                print "".join(line.rstrip() + "\t" +"3")
+            elif "===" in line:
+                print "".join(line.rstrip() + "\t" + "2")
+            elif "==" in line:
+                print "".join(line.rstrip() + "\t" + "1")  
+            else:
+                pass
+    
+if __name__ == "__main__" :
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i' , '--input', dest = 'input_file', default = './train_20.txt', help='input data')
+    args = parser.parse_args()
+    main(args.input_file)
+    
